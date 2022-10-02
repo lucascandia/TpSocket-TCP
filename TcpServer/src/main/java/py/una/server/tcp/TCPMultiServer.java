@@ -1,22 +1,13 @@
 package py.una.server.tcp;
 
+import py.una.entidad.NIS;
+
 import java.net.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.io.*;
 
-class NIS{
 
-    public Integer nroNIS;
-    public boolean isActivo;
-    public float consumo;
-
-    public NIS(Integer nroNIS, boolean isActivo, float consumo) {
-        this.nroNIS = nroNIS;
-        this.isActivo = isActivo;
-        this.consumo = consumo;
-    }
-}
 public class TCPMultiServer {
 
     //variables compartidas

@@ -43,7 +43,7 @@
 				<configuration>
 					<archive>
 						<manifest>
-							<mainClass>py.una.server.tcp.TCPClient_timeout</mainClass>
+							<mainClass>py.una.server.tcp.TCPMultiServer</mainClass>
 						</manifest>
 					</archive>
 				</configuration>

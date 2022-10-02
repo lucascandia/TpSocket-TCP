@@ -2,6 +2,8 @@ package py.una.server.tcp;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import org.json.simple.JSONObject;
+import py.una.entidad.NIS;
+
 import java.net.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -77,6 +79,7 @@ public class TCPServerHilo extends Thread {
                 if (tipoOperacion.intValue() == 1 )//orden de conexion
                 {
                     try {
+                        System.out.println("Ejecutando orden de conexion del Nis número: " + nroNIS);
                         Nis.isActivo = true;
                         respuestaJson.put(ClaveJson.nroNis, nroNIS);
                         respuestaJson.put(ClaveJson.tipoOperacion, 1);
@@ -96,6 +99,7 @@ public class TCPServerHilo extends Thread {
                 }else if(tipoOperacion.intValue() == 2 && Nis.isActivo)//registrar consumo
                 {
                     try {
+                        System.out.println("Ejecutando orden de registro de consumo del Nis número : " + nroNIS + ", con un consumo de: "+ Float.parseFloat(jsonObject.get(ClaveJson.consumo).getAsString()));
                         Nis.consumo = Nis.consumo+Float.parseFloat(jsonObject.get(ClaveJson.consumo).getAsString());
                         respuestaJson.put(ClaveJson.nroNis, nroNIS);
                         respuestaJson.put(ClaveJson.tipoOperacion, 2);
@@ -113,6 +117,7 @@ public class TCPServerHilo extends Thread {
                 else if(tipoOperacion.intValue()==3 && Nis.isActivo)//informar conectividad
                 {
                     try {
+                        System.out.println("Ejecutando orden de informe de conectividad del Nis número: " + nroNIS);
                         respuestaJson.put(ClaveJson.nroNis, nroNIS);
                         respuestaJson.put(ClaveJson.tipoOperacion, 3);
                         respuestaJson.put(ClaveJson.mensaje, "ok");
@@ -131,6 +136,7 @@ public class TCPServerHilo extends Thread {
                 else if(tipoOperacion.intValue()==4 && Nis.isActivo)//orde de desconexión
                 {
                     try {
+                        System.out.println("Ejecutando orden de desconexion del Nis número: " + nroNIS);
                         Nis.isActivo=false;
                         respuestaJson.put(ClaveJson.nroNis, nroNIS);
                         respuestaJson.put(ClaveJson.tipoOperacion, 4);
@@ -151,6 +157,7 @@ public class TCPServerHilo extends Thread {
                 else if(tipoOperacion.intValue()==5 && Nis.isActivo)//Listar NIS activos
                 {
                     try {
+                        System.out.println("Ejecutando orden de listar NIS activos al Nis número: " + nroNIS);
                         respuestaJson = new JSONObject();
                         ArrayList<Integer> usuarioString = new ArrayList<>();
                         iter = servidor.usuarios.iterator();
@@ -177,6 +184,7 @@ public class TCPServerHilo extends Thread {
                 else if(tipoOperacion.intValue()==6 && Nis.isActivo)//Listar NIS inactivos
                 {
                     try {
+                        System.out.println("Ejecutando orden de listar NIS inactivos al Nis número: " + nroNIS);
                         respuestaJson = new JSONObject();
                         ArrayList<Integer> usuarioString = new ArrayList<>();
                         iter = servidor.usuarios.iterator();
